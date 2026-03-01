@@ -10,20 +10,35 @@ public class Main {
         RollFormatter formatter = new RollFormatter();
 
         System.out.println("Rolagens: ");
+
+        if (!scanner.hasNextInt()) {
+            return;
+        }
         int nRolls = scanner.nextInt();
 
         if (nRolls < 1) {
-            scanner.close();
             return;
         }
 
         System.out.println("Modificador: ");
+
+        if (!scanner.hasNextInt()) {
+            return;
+        }
         int modifier = scanner.nextInt();
 
         System.out.println("Modo:");
         System.out.println("1 - Somar rolagens");
         System.out.println("2 - Rolagens isoladas");
+
+        if (!scanner.hasNextInt()) {
+            return;
+        }
         int option = scanner.nextInt();
+
+        if (option != 1 && option != 2) {
+            return;
+        }
 
         int[] rolls = roller.rollMultipleD20(nRolls);
 
@@ -31,10 +46,8 @@ public class Main {
 
         if (option == 1) {
             System.out.println(formatter.formatSum(rolls, modifier));
-        } else if (option == 2) {
+        } else {
             System.out.println(formatter.formatEach(rolls, modifier));
         }
-
-        scanner.close();
     }
 }
